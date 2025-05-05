@@ -2,13 +2,13 @@ require('dotenv').config(); // Load .env variables first
 
 const express = require('express');
 const mongoose = require('mongoose');
-//const cors = require('cors');
+const cors = require('cors'); // Import CORS
 
 const app = express();
 
-// Middleware
-const cors = require('cors');
-app.use(cors({ origin: 'http://localhost:5173' }));
+// Middleware for CORS - Use dynamic frontend URL based on environment
+const allowedOrigin = process.env.FRONTEND_URL || 'http://localhost:5173'; // Default to localhost if not set
+app.use(cors({ origin: allowedOrigin })); // Allow CORS only from the frontend URL
 
 app.use(express.json());
 
